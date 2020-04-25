@@ -184,6 +184,22 @@ extension ppDim {
     public func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
         return String(data: try self.jsonData(), encoding: encoding)
     }
+
+    public func save(toDir: URL) {
+
+        do {
+            let ppData = try self.jsonData()
+            let ppURL = toDir.appendingPathComponent("Post_Processing_Dims_dims.0.0.0.V4.json")
+            try! ppData.write(to: ppURL)
+        } catch {
+            print("Could not write PP Json to \(toDir.absoluteString)")
+        }
+
+    }
+
+
+
+
 }
 
 
