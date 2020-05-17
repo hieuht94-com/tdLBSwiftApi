@@ -31,6 +31,7 @@ final class OutputFilesURLTests: XCTestCase {
     }
 
     func testOutputDirCannotBeCreatedDueToPermissions() {
+        // TODO
         //            XCTAssertThrowsError
     }
 
@@ -39,51 +40,16 @@ final class OutputFilesURLTests: XCTestCase {
     func testPlotDirIsCreated0() {
 
         let outDir = try! OutputDir(testRootDir)
+        let plotDirString = outDir.formatXYPlane(QLength: 4, step: 10, atK:10)
+        XCTAssertEqual(plotDirString, testPlotDir[2])
 
 
-        let plotDir = outDir.createPlotDir(testPlotDir[0])
-
-
-        let testDir = testRootDir + "/" + testPlotDir[0]
-        XCTAssert(fm.fileExists(atPath: testDir, isDirectory: &isDirectory))
-        XCTAssertEqual(plotDir.path, testDir)
-    }
-
-
-    func testPlotDirIsCreated2(){
-        let outDir = try! OutputDir(testRootDir)
-
-        let plotDir = outDir.getXYPlane(atK: 10, step: 10)
-
-        let testDir = testRootDir + "/" + testPlotDir[2]
-        XCTAssert(fm.fileExists(atPath: testDir, isDirectory: &isDirectory))
-        print("QQQQQQQ" + plotDir.path)
-        XCTAssertEqual(plotDir.path, testDir)
+        let plotDir = outDir.createXYPlane(QLength: 4, step: 10, atK:10)
+        XCTAssert(fm.fileExists(atPath: plotDir.path, isDirectory: &isDirectory))
     }
 
 
 
-
-    //
-    //        let QvecbinFile = plot.plotQvecBinFile(name: "plot_")
-    //
-    //        let step = plot.step()
-    //        let version = plot.version()
-    //
-    //
-    //        //Returns list of XYPLnaes files.
-    //        let XYPlanes = o.getPlaneXYFiles(contents: steps)
-    //
-    //
-    //        plot.savePPdim()
-    //        ppDim.save(plot)
-
-
-
-
-    func testJimmy(){
-        XCTAssertEqual(formatStep(100), "00000100")
-    }
 
 
     static var allTests = [

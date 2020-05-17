@@ -2,8 +2,8 @@
 //  typealias.swift
 //  tdQVecTool
 //
-//  Created by Niall P. O'Byrnes on 19/22/11.
-//  Copyright © 2019 Niall P. O'Byrnes. All rights reserved.
+//  Created by Niall P. Ó Broin on 2019/22/11.
+//  Copyright © 2019 Niall P. Ó Broin. All rights reserved.
 //
 
 
