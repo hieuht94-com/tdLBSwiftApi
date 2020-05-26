@@ -8,6 +8,7 @@
 
 import Foundation
 
+
 public struct ppDim: Codable {
     //https://app.quicktype.io/#
 
@@ -95,13 +96,20 @@ public struct ppDim: Codable {
 
 extension ppDim {
 
-    public init(data: Data) throws {
-        self = try newJSONDecoder().decode(ppDim.self, from: data)
+    public init(dir: PlotDir) throws {
+
+        //        logger.info("Loading Post Process Dimension File: \(jsonURL)")
+        try self.init(url: dir.ppDimURL())
     }
 
     public init(url: URL) throws {
         try self.init(data: try Data(contentsOf: url))
     }
+
+    public init(data: Data) throws {
+        self = try newJSONDecoder().decode(ppDim.self, from: data)
+    }
+
 
     public init(json: String, using encoding: String.Encoding = .utf8) throws {
         guard let data = json.data(using: encoding) else {
@@ -109,22 +117,6 @@ extension ppDim {
         }
         try self.init(data: data)
     }
-
-
-    public init(dir: URL) throws {
-        var jsonURL = dir
-        jsonURL.appendPathComponent("Post_Processing_Dims_dims.0.0.0.V4.json")
-        //        logger.info("Loading Post Process Dimension File: \(jsonURL)")
-        try self.init(data: try Data(contentsOf: jsonURL))
-    }
-
-
-    public init(dir: String) throws {
-        let json = dir + "/Post_Processing_Dims_dims.0.0.0.V4.json"
-        //        logger.info("Loading Post Process Dimension File: \(json)")
-        try self.init(json: json)
-    }
-
 
 
 
@@ -184,6 +176,19 @@ extension ppDim {
     public func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
         return String(data: try self.jsonData(), encoding: encoding)
     }
+
+
+
+
+
+
+    public func write(to dir: URL) throws {
+        let json:String = try jsonString()!
+
+        try json.write(to: dir, atomically: true, encoding: .utf8)
+    }
+
+    
 }
 
 

@@ -140,6 +140,15 @@ extension QVecDim {
     public func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
         return String(data: try self.jsonData(), encoding: encoding)
     }
+
+    
+    public func write(to dir: URL) throws {
+        let json:String = try jsonString()!
+
+        try json.write(to: dir, atomically: true, encoding: .utf8)
+    }
+
+
 }
 
 
