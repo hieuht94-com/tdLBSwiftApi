@@ -64,15 +64,15 @@ public struct OutputDir {
         try self.init(rootDir: dir)
     }
 
-    public init(rootDirInHome:String) throws {
+    public init(rootDirInHome:String, createDir: Bool = false) throws {
         let fm = FileManager.default
-        let dir = fm.homeDirectoryForCurrentUser.path + rootDirInHome
+        let dir = fm.homeDirectoryForCurrentUser.appendingPathComponent( rootDirInHome).path
 
-        try self.init(rootDir: dir)
+        try self.init(rootDir: dir, createDir:createDir)
     }
 
-    public init(rootDir:URL) throws {
-        try self.init(rootDir: rootDir.absoluteString)
+    public init(rootDir:URL, createDir: Bool = false) throws {
+        try self.init(rootDir: rootDir.absoluteString,  createDir:createDir)
     }
 
 
