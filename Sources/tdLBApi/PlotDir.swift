@@ -20,6 +20,11 @@ public enum PlotDirKind: String {
     //    case sector = "sector"
 }
 
+enum ext: String {
+    case bin = "bin"
+    case json = "json"
+}
+
 
 
 
@@ -208,16 +213,6 @@ public extension URL {
 
 
 
-    func getPPDim() -> ppDim? {
-        do {
-            return try ppDim(dir: self)
-        } catch {
-            return nil
-        }
-    }
-
-    
-
     func ppDimURL() -> URL {
         //TODO V4??
         return self.appendingPathComponent("Post_Processing_Dims_dims.0.0.0.V4.json")
@@ -244,20 +239,6 @@ public extension URL {
 
     // MARK: Formatting names of bin and bin.json files
 
-    enum ext: String {
-        case bin = "bin"
-        case json = "json"
-    }
-
-    enum PlotDirKind: String {
-        case XYplane = "XYplane"
-        case XZplane = "XZplane"
-        case YZplane = "YZplane"
-        case rotational = "rotational_capture"
-        case volume = "volume"
-        //    case sector = "sector"
-    }
-
 
 
 
@@ -271,14 +252,12 @@ public extension URL {
 
     func QVecBinFileURL(name: String, idi: Int, idj: Int, idk: Int) -> URL {
 
-        return URL(fileURLWithPath: formatQVecFile(name, idi, idj, idk, .bin))
-
-
+        return self.appendingPathComponent(formatQVecFile(name, idi, idj, idk, .bin))
     }
 
     func QVecBinFileJSON(name: String, idi: Int, idj: Int, idk: Int) -> URL {
 
-        return URL(fileURLWithPath: formatQVecFile(name, idi, idj, idk, .json))
+        return self.appendingPathComponent(formatQVecFile(name, idi, idj, idk, .json))
     }
 
 

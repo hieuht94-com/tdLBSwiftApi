@@ -38,7 +38,7 @@ public struct OutputDir {
     /// Initialize with string.
     ///
     /// Throws an error if `URL` cannot be formed with the string or the directory cannot be created
-    public init(rootDir:String, createDir: Bool = false) throws {
+    public init(rootDir: String, createDir: Bool = false) throws {
 
 
         if rootDir.contains("V_\(PlotFilesVersion)") {
@@ -64,15 +64,15 @@ public struct OutputDir {
         try self.init(rootDir: dir)
     }
 
-    public init(rootDirInHome:String, createDir: Bool = false) throws {
+    public init(rootDirInHome: String, createDir: Bool = false) throws {
         let fm = FileManager.default
-        let dir = fm.homeDirectoryForCurrentUser.appendingPathComponent( rootDirInHome).path
+        let dir = fm.homeDirectoryForCurrentUser.appendingPathComponent(rootDirInHome).path
 
-        try self.init(rootDir: dir, createDir:createDir)
+        try self.init(rootDir: dir, createDir: createDir)
     }
 
-    public init(rootDir:URL, createDir: Bool = false) throws {
-        try self.init(rootDir: rootDir.absoluteString,  createDir:createDir)
+    public init(rootDir: URL, createDir: Bool = false) throws {
+        try self.init(rootDir: rootDir.absoluteString,  createDir: createDir)
     }
 
 

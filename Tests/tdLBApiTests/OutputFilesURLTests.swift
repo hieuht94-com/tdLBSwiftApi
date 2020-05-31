@@ -45,12 +45,12 @@ class OutputFilesURLTests: XCTestCase {
 
     //TODO ERROR
     func testOutputDirInitWhenDirExists() {
-        let o = try! OutputDir(testRootDir)
+        let o = try! OutputDir(rootDir: testRootDir)
         XCTAssertEqual(testRootDir, o.root.path)
     }
 
     func testOutputDirIsCreated() {
-        let _ = try! OutputDir(testRootDir, createDir: true)
+        let _ = try! OutputDir(rootDir: testRootDir, createDir: true)
         XCTAssert(fm.fileExists(atPath: testRootDir))
         XCTAssert(fm.fileExists(atPath: testRootDir, isDirectory: &isDirectory))
     }
@@ -65,7 +65,7 @@ class OutputFilesURLTests: XCTestCase {
 
     func testPlotFormattedAndCreatedXYPlane() {
 
-        let outDir = try! OutputDir(testRootDir, createDir: true)
+        let outDir = try! OutputDir(rootDir: testRootDir, createDir: true)
 
 
         let xyString = outDir.formatXYPlane(QLength: 4, step: 10, atK:10)
@@ -78,7 +78,7 @@ class OutputFilesURLTests: XCTestCase {
 
 
     func testPlotFormattedAndCreatedXZPlane() {
-        let outDir = try! OutputDir(testRootDir, createDir: true)
+        let outDir = try! OutputDir(rootDir: testRootDir, createDir: true)
 
         let xzString = outDir.formatXZPlane(QLength: 4, step: 10, atJ:10)
         XCTAssertEqual(xzString, testDirStrings[1])
@@ -89,7 +89,7 @@ class OutputFilesURLTests: XCTestCase {
     }
 
     func testPlotFormattedAndCreatedYZPlane() {
-        let outDir = try! OutputDir(testRootDir, createDir: true)
+        let outDir = try! OutputDir(rootDir: testRootDir, createDir: true)
 
         let yzString = outDir.formatYZPlane(QLength: 4, step: 10, atI:10)
         XCTAssertEqual(yzString, testDirStrings[2])
@@ -103,7 +103,7 @@ class OutputFilesURLTests: XCTestCase {
 
 
     func testFindPlotDirs() {
-        let outDir = try! OutputDir(testRootDir, createDir: true)
+        let outDir = try! OutputDir(rootDir: testRootDir, createDir: true)
 
 
         let _ = outDir.createXYPlane(QLength: 4, step: 10, atK:10)
