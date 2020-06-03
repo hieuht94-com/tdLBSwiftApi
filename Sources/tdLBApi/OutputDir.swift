@@ -14,15 +14,14 @@ public enum diskErrors: Error {
     case directoryNotFound
     case fileNotReadable
     case fileNotJsonParsable
-    case PlotDir
-    case NotPlotDir
+    case isPlotDir
+    case isNotPlotDir
     case OtherDiskError
 }
 
 
-/**
- An OutputDir is a the path of a local file on disk that exists and is writable or is created and writable
- */
+
+///An OutputDir is a the path of a local file on disk that exists and is writable or is created and writable
 public struct OutputDir {
 
     public let fm = FileManager.default
@@ -42,7 +41,7 @@ public struct OutputDir {
 
 
         if rootDir.contains("V_\(PlotFilesVersion)") {
-            throw diskErrors.PlotDir
+            throw diskErrors.isPlotDir
         }
 
 
@@ -50,7 +49,7 @@ public struct OutputDir {
 
         if createDir {
             try createDirIfDoesntExist(rootDir)
-            //Check can write directory below
+            // TODO: Check can write directory below
         }
 
     }
@@ -126,7 +125,7 @@ public struct OutputDir {
 
 
 
-    //TODO
+    // TODO:
 //    func formatRotatingSector(name: String="plot", step: Int, angle: Int, QLength: Int) -> String {
 //        return "TODO"
 //    }
@@ -181,12 +180,11 @@ public struct OutputDir {
         do {
             try createDirIfDoesntExist(newPlotDir)
         } catch {
-            //TODO Previously tests that permissions are writable on rootdir.  Other errors may be generated here, full disk etc that could cause problems.
+            //TODO:  Previously tests that permissions are writable on rootdir.  Other errors may be generated here, full disk etc that could cause problems.
             print(error.localizedDescription)
         }
 
-        let dir =
-        PlotDir(fileURLWithPath: newPlotDir, isDirectory: true)
+        let dir = PlotDir(fileURLWithPath: newPlotDir, isDirectory: true)
 
         return dir
     }
