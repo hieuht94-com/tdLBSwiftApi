@@ -1,7 +1,11 @@
 import XCTest
 @testable import tdLBApi
 
-class OutputFilesURLTests: XCTestCase {
+
+
+
+
+class OutputDirTests: XCTestCase {
 
     let fm = FileManager.default
     var testRootDir:String = ""

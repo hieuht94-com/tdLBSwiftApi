@@ -62,15 +62,16 @@ public struct OutputDir {
         try self.init(rootDir: dir)
     }
 
+    #if os(macOS)
     public init(rootDirInHome: String, createDir: Bool = false) throws {
         let fm = FileManager.default
         let dir = fm.homeDirectoryForCurrentUser.appendingPathComponent(rootDirInHome).path
-
         try self.init(rootDir: dir, createDir: createDir)
     }
+    #endif
 
     public init(rootDir: URL, createDir: Bool = false) throws {
-        try self.init(rootDir: rootDir.absoluteString,  createDir: createDir)
+        try self.init(rootDir: rootDir.path,  createDir: createDir)
     }
 
 

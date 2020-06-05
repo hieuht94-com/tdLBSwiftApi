@@ -20,9 +20,21 @@ public enum PlotDirKind: String {
     //    case sector = "sector"
 }
 
-enum ext: String {
+
+
+enum binExt: String {
     case bin = "bin"
-    case json = "json"
+    case binJson = "bin.json"
+
+    case rho = "rho.bin"
+
+    case ux = "ux.bin"
+    case uy = "uy.bin"
+    case uz = "uz.bin"
+
+    case vorticity = "vorticity.bin"
+
+
 }
 
 
@@ -31,6 +43,7 @@ enum ext: String {
 
 // TODO: Is there a better way to do this?
 public typealias PlotDir = URL
+
 
 public extension URL {
 
@@ -41,14 +54,16 @@ public extension URL {
 
 
 
+
+
     func isValid() -> Bool {
-        return self.lastPathComponent.contains(".V_4.")
+        return self.hasDirectoryPath && self.lastPathComponent.contains(".V_4.")
     }
 
     func exists() -> Bool {
         let fm = FileManager.default
         var isDirectory = ObjCBool(true)
-        return fm.fileExists(atPath: self.absoluteString, isDirectory: &isDirectory)
+        return fm.fileExists(atPath: self.path, isDirectory: &isDirectory)
     }
 
     func isValidAndExists() -> Bool {
@@ -123,31 +138,46 @@ public extension URL {
     }
 
 
+    func replaceLastPathComponent(newLastPathComp path: String) -> PlotDir {
+
+        let root = self.deletingLastPathComponent()
+        return root.appendingPathComponent(path)
+
+    }
+
+    var lastTwoPathComponents: String {
+
+        let u = self.lastPathComponent
+        let v = self.deletingLastPathComponent()
+        return v.lastPathComponent + "/" + u
+    }
 
 
-    func formatCutDelta(delta: Int) throws -> PlotDir {
+
+    func formatCutDelta(delta: Int) -> PlotDir? {
         if let cut = self.cut() {
             let replace: String = "cut_\(cut + delta)"
 
             let newDir = self.lastPathComponent.replacingOccurrences(of: #"cut_[0-9]*"#, with: replace, options: .regularExpression)
 
-            return PlotDir(fileURLWithPath: newDir)
-        }else {
-            throw diskErrors.OtherDiskError
+            return replaceLastPathComponent(newLastPathComp: newDir)
+        } else {
+            return nil
         }
     }
 
 
-    func formatCutDelta(replaceCut: Int) throws -> PlotDir {
+    func formatCutDelta(replaceCut: Int) -> PlotDir? {
         if let _ = self.cut() {
 
             let replace: String = "cut_\(replaceCut)"
 
             let newDir = self.lastPathComponent.replacingOccurrences(of: #"cut_[0-9]*"#, with: replace, options: .regularExpression)
 
-            return PlotDir(fileURLWithPath: newDir)
+            return replaceLastPathComponent(newLastPathComp: newDir)
         } else {
-            throw diskErrors.OtherDiskError
+            return nil
+
         }
     }
 
@@ -179,13 +209,16 @@ public extension URL {
 
         let filteredBinFileNames = fileNames.filter{ $0.range(of: regex, options:.regularExpression) != nil}
 
-        let filteredBinFileURLs = filteredBinFileNames.map{self.appendingPathComponent($0)}
 
-        //        print(dirURL, directoryContents, fileNames, regex, filteredBinFileNames)
+
+
+        let filteredBinFileURLs = filteredBinFileNames.map{self.appendingPathComponent($0)}
 
         return filteredBinFileURLs
 
     }
+
+
 
 
     func qVecBinRegex() -> String {
@@ -209,28 +242,15 @@ public extension URL {
     //    }
 
 
-    //    func getQvecRotationFiles(faceDelta: facesIJK) throws -> [URL] {
+    //    func getQvecRotationFiles(faceDelta: facesIJK) -> [URL] {
     //        return try getFiles(withRegex: qVecRotationBinRegex(delta: faceDelta))
     //    }
     //
-    //    func getF3RotationFiles(faceDelta: facesIJK) throws -> [URL] {
+    //    func getF3RotationFiles(faceDelta: facesIJK) -> [URL] {
     //        return try getFiles(withRegex: F3RotationBinRegex(delta: faceDelta))
     //    }
 
 
-
-
-    func ppDimURL() -> URL {
-        // TODO: V4??
-        return self.appendingPathComponent("Post_Processing_Dims_dims.0.0.0.V4.json")
-    }
-
-
-
-
-
-
-    // MARK: Getting bin and bin.json files
 
 
     func getQvecFiles() -> [URL] {
@@ -246,12 +266,16 @@ public extension URL {
 
     // MARK: Formatting names of bin and bin.json files
 
+    /// Returns the name of the meta information file that holds data of the Plot contained in PlotDir.
+    func ppDimURL() -> URL {
+        return self.appendingPathComponent("Post_Processing_Dims_dims.0.0.0.V\(self.OutputFilesURLVersion).json")
+    }
 
 
 
 
-    private func formatQVecFile(_ name: String, _ idi: Int, _ idj: Int, _ idk: Int, _ ext: ext) -> String {
-        return "\(name).node.\(idi).\(idj).\(idk).V\(self.OutputFilesURLVersion).\(ext)"
+    private func formatQVecFile(_ name: String, _ idi: Int, _ idj: Int, _ idk: Int, _ ext: binExt) -> String {
+        return "\(name).node.\(idi).\(idj).\(idk).V\(self.OutputFilesURLVersion).\(ext.rawValue)"
     }
 
 
@@ -264,21 +288,60 @@ public extension URL {
 
     func QVecBinFileJSON(name: String, idi: Int, idj: Int, idk: Int) -> URL {
 
-        return self.appendingPathComponent(formatQVecFile(name, idi, idj, idk, .json))
+        return self.appendingPathComponent(formatQVecFile(name, idi, idj, idk, .binJson))
     }
 
 
 
 
-    func Node000QVecBinFileURL(name: String) -> URL {
+
+
+    func node000QVecBinFileURL(name: String) -> URL {
 
         return QVecBinFileURL(name: name, idi: 0, idj: 0, idk: 0)
     }
 
-    func Node000QVecBinFileJSON(name: String) -> URL {
+    func node000QVecBinFileJSON(name: String) -> URL {
 
         return QVecBinFileJSON(name: name, idi: 0, idj: 0, idk: 0)
     }
+
+
+
+
+
+
+
+
+    private func xURL(to writeDir: URL? = nil, ext: binExt) -> URL {
+
+        let fileName = "\(self.lastPathComponent).\(ext.rawValue)"
+
+        if let dir = writeDir {
+            return dir.appendingPathComponent(fileName)
+        }
+
+        return self.appendingPathComponent(fileName)
+    }
+
+
+    func rhoURL(to writeDir: URL? = nil) -> URL {
+        return xURL(to: writeDir, ext: .rho)
+    }
+    func uxURL(to writeDir: URL? = nil) -> URL {
+        return xURL(to: writeDir, ext: .ux)
+    }
+    func uyURL(to writeDir: URL? = nil) -> URL {
+        return xURL(to: writeDir, ext: .uy)
+    }
+    func uzURL(to writeDir: URL? = nil) -> URL {
+        return xURL(to: writeDir, ext: .uz)
+    }
+    func vorticityURL(to writeDir: URL? = nil) -> URL {
+        return xURL(to: writeDir, ext: .vorticity)
+    }
+
+
 
 
 
