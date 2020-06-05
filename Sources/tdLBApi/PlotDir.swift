@@ -41,14 +41,22 @@ public extension URL {
 
 
 
-
-    func validate() -> Bool {
+    func isValid() -> Bool {
         return self.lastPathComponent.contains(".V_4.")
     }
 
+    func exists() -> Bool {
+        let fm = FileManager.default
+        var isDirectory = ObjCBool(true)
+        return fm.fileExists(atPath: self.absoluteString, isDirectory: &isDirectory)
+    }
+
+    func isValidAndExists() -> Bool {
+        return isValid() && exists()
+    }
 
 
-
+    
 
 
     // MARK: Query plotDirs

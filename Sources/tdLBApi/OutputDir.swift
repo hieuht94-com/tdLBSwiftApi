@@ -24,7 +24,7 @@ public enum diskErrors: Error {
 ///An OutputDir is a the path of a local file on disk that exists and is writable or is created and writable
 public struct OutputDir {
 
-    public let fm = FileManager.default
+//    public let fm = FileManager.default
 
     public let root:URL
 
@@ -58,7 +58,6 @@ public struct OutputDir {
 
     public init() throws {
         let fm = FileManager.default
-
         let dir = fm.currentDirectoryPath
         try self.init(rootDir: dir)
     }
@@ -77,6 +76,7 @@ public struct OutputDir {
 
 
     private func createDirIfDoesntExist(_ dir:String) throws {
+        let fm = FileManager.default
 
         var isDirectory = ObjCBool(true)
         if !fm.fileExists(atPath: dir, isDirectory: &isDirectory){
@@ -95,6 +95,7 @@ public struct OutputDir {
 
     private func getPlotDirs(withRegex regex: String) -> [PlotDir] {
         //https://stackoverflow.com/questions/27721418/getting-list-of-files-in-documents-folder/27722526
+        let fm = FileManager.default
 
         var directoryContents: [URL]
 
