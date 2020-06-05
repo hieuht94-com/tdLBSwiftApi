@@ -12,19 +12,19 @@ import Foundation
 public struct Velocity<tV: BinaryFloatingPoint> {
     //    var v = simd_float4(rho, ux, uy, uz)
 
-    var rho: tV
-    var ux: tV
-    var uy: tV
-    var uz: tV
+    public var rho: tV
+    public var ux: tV
+    public var uy: tV
+    public var uz: tV
 
-    init(){
+    public init(){
         rho = tV.zero
         ux = tV.zero
         uy = tV.zero
         uz = tV.zero
     }
 
-    init(rho: tV, ux: tV, uy: tV, uz: tV){
+    public init(rho: tV, ux: tV, uy: tV, uz: tV){
         self.rho = rho
         self.ux = ux
         self.uy = uy
@@ -39,20 +39,20 @@ public struct OrthoVelocity2DPlane<tV: BinaryFloatingPoint> {
 
     var p: [[Velocity<tV>]]
 
-    init(cols:Int, rows: Int){
+    public init(cols:Int, rows: Int){
         self.p = Array(repeating: Array(repeating: Velocity(), count: cols), count: rows)
     }
 
-    var cols: Int {
+    public var cols: Int {
         return p[0].count
     }
 
-    var rows: Int {
+    public var rows: Int {
         return p.count
     }
 
 
-    subscript(c: Int, r: Int) -> Velocity<tV> {
+    public subscript(c: Int, r: Int) -> Velocity<tV> {
         get {
             return p[c][r]
         }
@@ -65,7 +65,7 @@ public struct OrthoVelocity2DPlane<tV: BinaryFloatingPoint> {
 
 
 
-    func formatWriteFileName(writeTo dir: URL, withSuffix: String) -> URL {
+    private func formatWriteFileName(writeTo dir: URL, withSuffix: String) -> URL {
 
         let fileName: String = dir.lastPathComponent + withSuffix
         var modURL: URL = dir.deletingLastPathComponent()
@@ -74,7 +74,7 @@ public struct OrthoVelocity2DPlane<tV: BinaryFloatingPoint> {
     }
 
 
-    func writeVelocity(to fileName: URL, withBorder border: Int = 1){
+    public func writeVelocity(to fileName: URL, withBorder border: Int = 1){
 
         let height = cols - border * 2
         let width = rows - border * 2
@@ -132,11 +132,11 @@ public struct Velocity3DGrid<tV: BinaryFloatingPoint> {
 
     var g: [[[Velocity<tV>]]]
 
-    init(x: Int, y: Int, z: Int){
+    public init(x: Int, y: Int, z: Int){
         self.g = Array(repeating: Array(repeating: Array(repeating: Velocity(), count: z + 2), count: y + 2), count: x + 2)
     }
 
-    subscript(i: Int, j: Int, k: Int) -> Velocity<tV> {
+    public subscript(i: Int, j: Int, k: Int) -> Velocity<tV> {
         get {
             return g[i][j][k]
         }
