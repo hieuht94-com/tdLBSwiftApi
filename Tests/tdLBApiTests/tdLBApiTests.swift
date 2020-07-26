@@ -1,5 +1,5 @@
 import XCTest
-@testable import tdLBApi
+@testable //import tdLBApi
 
 final class tdLBApiTests: XCTestCase {
     func testExample() {

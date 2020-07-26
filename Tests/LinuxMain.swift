@@ -1,6 +1,6 @@
 import XCTest
 
-import tdLBApiTests
+//import tdLBApiTests
 
 var tests = [XCTestCaseEntry]()
 tests += tdLBApiTests.allTests()
