@@ -1,6 +1,6 @@
 //
 //  File.swift
-//  
+//
 //
 //  Created by Niall Ó Broin on 30/05/2020.
 //
@@ -66,25 +66,16 @@ public enum QVecType {
         switch self{
             case .Double: return MemoryLayout<Double>.size
             case .Single: return MemoryLayout<Float32>.size
-
-            //Half not yet available in MacOS
-            case .Half: return 2
-
+#if os(macOS)
+//Half not yet available in MacOS
+        case .Half: return 2
+#else
+        case .Half: return MemoryLayout<Half>.size
+#endif
         }
     }
 
 
 }
-
-
-
-
-public enum QLen: Int {
-    case q27 = 27
-    case q19 = 19
-    case q7 = 7
-}
-
-
 
 

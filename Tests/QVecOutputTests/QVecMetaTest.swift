@@ -6,15 +6,15 @@
 //
 
 import XCTest
-@testable import QVec
+@testable import QVecOutput
 
-class QVecDimsTest: XCTestCase {
+class QVecMetaTest: XCTestCase {
 
     var testDirURL: URL!
 
     override func setUp() {
         let fm = FileManager.default
-        let testDir = fm.currentDirectoryPath + "/testQVecDim.json"
+        let testDir = fm.currentDirectoryPath + "/testQVecMeta.json"
         testDirURL = URL(fileURLWithPath: testDir, isDirectory: false)
 
     }

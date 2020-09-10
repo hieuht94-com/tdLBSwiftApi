@@ -267,7 +267,7 @@ public extension URL {
     // MARK: Formatting names of bin and bin.json files
 
     /// Returns the name of the meta information file that holds data of the Plot contained in PlotDir.
-    func ppDimURL() -> URL {
+    var plotDirMetaURL: URL {
         return self.appendingPathComponent("Post_Processing_Dims_dims.0.0.0.V\(self.OutputFilesURLVersion).json")
     }
 

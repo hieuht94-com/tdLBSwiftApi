@@ -99,7 +99,7 @@ extension PlotDirMeta {
     public init(dir: PlotDir) throws {
 
         //        logger.info("Loading Post Process Dimension File: \(jsonURL)")
-        try self.init(url: dir.ppDimURL())
+        try self.init(url: dir.plotDirMetaURL)
     }
 
     public init(url: URL) throws {

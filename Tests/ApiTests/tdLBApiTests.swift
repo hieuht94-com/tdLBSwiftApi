@@ -1,5 +1,6 @@
 import XCTest
 @testable import Api
+@testable import QVec
 
 final class tdLBApiTests: XCTestCase {
     func testExample() {

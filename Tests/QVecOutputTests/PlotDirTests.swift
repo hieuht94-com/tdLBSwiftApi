@@ -6,7 +6,7 @@
 //
 
 import XCTest
-@testable import QVec
+@testable import QVecOutput
 
 class PlotDirTests: XCTestCase {
 

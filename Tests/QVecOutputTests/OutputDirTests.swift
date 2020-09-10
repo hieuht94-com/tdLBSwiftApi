@@ -6,7 +6,7 @@
 //
 
 import XCTest
-@testable import QVec
+@testable import QVecOutput
 
 class OutputDirTests: XCTestCase {
 
@@ -138,7 +138,4 @@ class OutputDirTests: XCTestCase {
     }
 
 
-    //    static var allTests = [
-    //        ("testOutputDirInitWhenDirExists", testOutputDirInitWhenDirExists),
-    //    ]
 }

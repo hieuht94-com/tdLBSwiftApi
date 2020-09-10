@@ -6,14 +6,6 @@
 //
 
 
-struct tdGeometryLib {
-    var text = "Hello, World!"
-}
-
-
-
-
-
 public protocol Geometry {
 
     var gridX: Int {get}
