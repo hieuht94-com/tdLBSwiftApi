@@ -1,5 +1,5 @@
 //
-//  apiOutput.swift
+//  OutputData.swift
 //
 // This file was generated from JSON Schema using quicktype, do not modify it directly.
 // To parse the JSON, add this file to your project and do:
@@ -8,7 +8,7 @@
 //https://app.quicktype.io?share=egPgPZcPgEwTNPPxrDqs
 
 import Foundation
-
+import Api
 
 
 // MARK: - Output

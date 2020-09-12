@@ -7,6 +7,10 @@
 
 import Foundation
 
+public typealias Radian = Float
+public typealias Degree = Float
+
+
 
 public struct Size3d {
     public var x, y, z: Int

@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import QVecOutput
 //import Numerics
 
 
@@ -25,10 +24,15 @@ public enum QLen: Int {
 ///Use Real for testing, in reality always BinaryFloatingPoint
 //struct Q<T: Real> {
 public struct Q<T: BinaryFloatingPoint> {
-    var q: [T]
+    public var q: [T]
 
     public init(qLen: QLen) {
         self.q = Array(repeating: T.zero, count: qLen.rawValue)
+    }
+
+    public init(with initialVal: T, qLen: QLen) {
+        
+        self.q = Array(repeating: initialVal, count: qLen.rawValue)
     }
 
     public init(q: [T]) {

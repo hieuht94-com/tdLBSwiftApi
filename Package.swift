@@ -13,13 +13,7 @@ let package = Package(
         // Products define the executables and libraries produced by a package, and make them visible to other packages.
         .library(
             name: "tdLBApi",
-            targets: ["Api"]),
-        .library(
-            name: "tdLBGeometry",
-            targets: ["Geometry"]),
-        .library(
-            name: "tdLBQVecOutput",
-            targets: ["QVecOutput"]),
+            targets: ["Api", "Geometry", "OutputData", "QVecOutputDir"]),
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -30,21 +24,28 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages which this package depends on.
         .target(
             name: "Api",
-            dependencies: ["QVecOutput"]),
+            dependencies: []),
         .target(
             name: "Geometry",
-            dependencies: []),
+            dependencies: ["Api"]),
         .target(
-            name: "QVecOutput",
-            dependencies: []),
+            name: "OutputData",
+            dependencies: ["Api"]),
+        .target(
+            name: "QVecOutputDir",
+            dependencies: ["Api"]),
+        
         .testTarget(
             name: "ApiTests",
-            dependencies: ["Api", "QVecOutput"]),
+            dependencies: ["Api"]),
         .testTarget(
             name: "GeometryTests",
-            dependencies: ["Geometry", "Api"]),
+            dependencies: ["Api"]),
         .testTarget(
-            name: "QVecOutputTests",
-            dependencies: ["QVecOutput", "Api"])
+            name: "OutputDataTests",
+            dependencies: ["Api"]),
+        .testTarget(
+            name: "QVecOutputDirTests",
+            dependencies: ["Api"])
     ]
 )

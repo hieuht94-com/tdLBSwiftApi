@@ -6,10 +6,9 @@
 //
 
 import Foundation
+import Api
 
 
-public typealias Radian = Float
-public typealias Degree = Float
 
 
 public typealias FixedGeomPoints = RotatingGeomPoints

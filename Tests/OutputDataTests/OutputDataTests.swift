@@ -1,16 +1,14 @@
 import XCTest
-@testable import Api
-@testable import QVec
+@testable import Geometry
 
-final class tdLBApiTests: XCTestCase {
+
+final class OutputDataTests: XCTestCase {
     func testExample() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct
         // results.
-//        XCTAssertEqual(tdLBApi().text, "Hello, World!")
+//        XCTAssertEqual(tdGeometryLib().text, "Hello, World!")
     }
-
-
 
     static var allTests = [
         ("testExample", testExample),

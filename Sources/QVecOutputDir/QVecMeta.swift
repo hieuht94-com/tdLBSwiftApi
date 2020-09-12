@@ -9,6 +9,10 @@ import Foundation
 
 /// This struct reads the json file that holds the meta information to read the binary files. The binary files can be written by C++ or Swift.
 ///
+
+
+
+
 public struct QVecMeta: Codable {
     //https://app.quicktype.io#
 
