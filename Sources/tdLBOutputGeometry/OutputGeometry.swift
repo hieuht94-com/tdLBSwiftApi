@@ -1,5 +1,5 @@
 //
-//  OutputData.swift
+//  OutputGeometry.swift
 //
 // This file was generated from JSON Schema using quicktype, do not modify it directly.
 // To parse the JSON, add this file to your project and do:
@@ -8,11 +8,11 @@
 //https://app.quicktype.io?share=egPgPZcPgEwTNPPxrDqs
 
 import Foundation
-import Api
+import tdLB
 
 
 // MARK: - Output
-public struct OutputData: Codable {
+public struct OutputGeometry: Codable {
     public var volume = [Volume]()
     public var ortho2DXY = [Ortho2D]()
     public var ortho2DXZ = [Ortho2D]()
@@ -51,10 +51,10 @@ public struct OutputData: Codable {
 
 // MARK: Output convenience initializers and mutators
 
-extension OutputData {
+extension OutputGeometry {
 
     public init(data: Data) throws {
-        self = try newJSONDecoder().decode(OutputData.self, from: data)
+        self = try newJSONDecoder().decode(OutputGeometry.self, from: data)
     }
 
     public init(json: String, using encoding: String.Encoding = .utf8) throws {

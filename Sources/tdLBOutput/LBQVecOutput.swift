@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import Api
+import tdLB
 
 
 extension LB {
@@ -42,7 +42,7 @@ extension LB {
 
         
         
-        let d = QVecMeta(qDataType: String(describing: QVecType),
+        let d = QVecBinMeta(qDataType: String(describing: QVecType),
                          qOutputLength: qOutputLength,
                          binFileSizeInStructs: numStructs,
                          coordsType: String(describing: tCoordType),

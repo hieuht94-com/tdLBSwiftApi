@@ -9,11 +9,7 @@ import Foundation
 
 /// This struct reads the json file that holds the meta information to read the binary files. The binary files can be written by C++ or Swift.
 ///
-
-
-
-
-public struct QVecMeta: Codable {
+public struct QVecBinMeta: Codable {
     //https://app.quicktype.io#
 
     public let qDataType: String
@@ -80,9 +76,9 @@ public struct QVecMeta: Codable {
 
 }
 
-extension QVecMeta {
+extension QVecBinMeta {
     public init(data: Data) throws {
-        self = try newJSONDecoder().decode(QVecMeta.self, from: data)
+        self = try newJSONDecoder().decode(QVecBinMeta.self, from: data)
     }
 
     public init(_ json: String, using encoding: String.Encoding = .utf8) throws {

@@ -6,9 +6,9 @@
 //
 
 import XCTest
-@testable import QVecOutputDir
+@testable import tdLBOutput
 
-class QVecMetaTest: XCTestCase {
+class QVecBinMetaTest: XCTestCase {
 
     var testDirURL: URL!
 
@@ -35,7 +35,7 @@ class QVecMetaTest: XCTestCase {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
 
-        let dim1 = QVecMeta(qDataType: "Float32",
+        let dim1 = QVecBinMeta(qDataType: "Float32",
                           qOutputLength: 4,
                           binFileSizeInStructs: 1000,
                           coordsType: "UInt16",
@@ -48,7 +48,7 @@ class QVecMetaTest: XCTestCase {
 
         try! dim1.write(to: testDirURL)
 
-        let dim2 = try! QVecMeta(testDirURL)
+        let dim2 = try! QVecBinMeta(testDirURL)
 
         XCTAssertEqual(dim1.binFileSizeInStructs, dim2.binFileSizeInStructs)
         XCTAssertEqual(dim1.structName, dim2.structName)

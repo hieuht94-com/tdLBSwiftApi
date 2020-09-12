@@ -22,8 +22,8 @@ public enum QLen: Int {
 
 
 ///Use Real for testing, in reality always BinaryFloatingPoint
-//struct Q<T: Real> {
-public struct Q<T: BinaryFloatingPoint> {
+//struct QVec<T: Real> {
+public struct QVec<T: BinaryFloatingPoint> {
     public var q: [T]
 
     public init(qLen: QLen) {
@@ -38,7 +38,7 @@ public struct Q<T: BinaryFloatingPoint> {
     public init(q: [T]) {
         self.q = q
     }
-
+    
     public var rho: T {
         return q[1] * q[2] * q[3]
     }

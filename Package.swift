@@ -13,7 +13,7 @@ let package = Package(
         // Products define the executables and libraries produced by a package, and make them visible to other packages.
         .library(
             name: "tdLBApi",
-            targets: ["Api", "Geometry", "OutputData", "QVecOutputDir"]),
+            targets: ["tdLB", "tdLBGeometry", "tdLBOutputGeometry", "tdLBOutput"]),
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -23,29 +23,29 @@ let package = Package(
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
         // Targets can depend on other targets in this package, and on products in packages which this package depends on.
         .target(
-            name: "Api",
+            name: "tdLB",
             dependencies: []),
         .target(
-            name: "Geometry",
-            dependencies: ["Api"]),
+            name: "tdLBGeometry",
+            dependencies: ["tdLB"]),
         .target(
-            name: "OutputData",
-            dependencies: ["Api"]),
+            name: "tdLBOutputGeometry",
+            dependencies: ["tdLB"]),
         .target(
-            name: "QVecOutputDir",
-            dependencies: ["Api"]),
+            name: "tdLBOutput",
+            dependencies: ["tdLB"]),
         
         .testTarget(
-            name: "ApiTests",
-            dependencies: ["Api"]),
+            name: "tdLBTests",
+            dependencies: ["tdLB"]),
         .testTarget(
-            name: "GeometryTests",
-            dependencies: ["Api"]),
+            name: "tdLBGeometryTests",
+            dependencies: ["tdLBGeometry"]),
         .testTarget(
-            name: "OutputDataTests",
-            dependencies: ["Api"]),
+            name: "tdLBOutputGeometryTests",
+            dependencies: ["tdLBOutputGeometry"]),
         .testTarget(
-            name: "QVecOutputDirTests",
-            dependencies: ["Api"])
+            name: "tdLBOutputTests",
+            dependencies: ["tdLBOutput"])
     ]
 )

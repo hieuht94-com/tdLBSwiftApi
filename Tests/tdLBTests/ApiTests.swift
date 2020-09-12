@@ -1,14 +1,17 @@
 import XCTest
-@testable import Geometry
+@testable import tdLB
 
 
-final class GeometryTests: XCTestCase {
+final class ApiTests: XCTestCase {
     func testExample() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct
         // results.
-//        XCTAssertEqual(tdGeometryLib().text, "Hello, World!")
+//        XCTAssertEqual(tdLBApi().text, "Hello, World!")
     }
+
+
+    
 
     static var allTests = [
         ("testExample", testExample),

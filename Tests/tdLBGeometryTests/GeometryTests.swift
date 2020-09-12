@@ -1,8 +1,8 @@
 import XCTest
-@testable import Geometry
+@testable import tdLBGeometry
 
 
-final class OutputDataTests: XCTestCase {
+final class GeometryTests: XCTestCase {
     func testExample() {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct

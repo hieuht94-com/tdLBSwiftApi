@@ -4,7 +4,7 @@
 //
 //  Created by Niall Ó Broin on 26/03/2020.
 //
-import Api
+import tdLB
 
 public protocol Geometry {
 
