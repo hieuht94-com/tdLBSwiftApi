@@ -67,18 +67,12 @@ public enum QVecType {
     case Half
 
     public var sizeInBytes: Int {
-        switch self{
+        switch self {
             case .Double: return MemoryLayout<Double>.size
             case .Single: return MemoryLayout<Float32>.size
-#if os(macOS)
-//Half not yet available in MacOS
-        case .Half: return 2
-#else
-        case .Half: return MemoryLayout<Half>.size
-#endif
+            case .Half: return 2
         }
     }
-
 
 }
 
