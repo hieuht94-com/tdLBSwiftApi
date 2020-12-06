@@ -17,8 +17,8 @@ public enum PointCloudElementType: Int {
 
 
 public struct PointCloudVertex {
-    var i: Float, j: Float, k: Float
-    var r: Float, g: Float, b: Float
+    public internal(set) var i: Float, j: Float, k: Float
+    public internal(set) var r: Float, g: Float, b: Float
 
     public init(i: Float, j: Float, k: Float, t: PointCloudElementType){
         self.i = i
@@ -37,29 +37,46 @@ public struct PointCloudVertex {
         }
     }
 
-    public init(i: Int, j: Int, k: Int, t: PointCloudElementType){
+    public init(i: Int, j: Int, k: Int, t: PointCloudElementType = .fixed){
         self.init(i:Float(i), j:Float(j), k:Float(k), t:t)
     }
 
-    public init(i: Double, j: Double, k: Double, t: PointCloudElementType){
+    public init(i: Double, j: Double, k: Double, t: PointCloudElementType = .fixed){
         self.init(i:Float(i), j:Float(j), k:Float(k), t:t)
     }
 }
 
 
 public class PointCloud {
+    public private(set) var n: Int
+    public private(set) var vertices: [PointCloudVertex]
 
-    var n: Int = 0
-    var vertices: Array<PointCloudVertex> = []
-
+    public init(vertices: [PointCloudVertex] = [], n: Int = 0) {
+        self.vertices = vertices
+        self.n = n
+    }
+    
     public func getNode() -> SCNNode {
 
         let node = buildNode(points: vertices)
         NSLog(String(describing: node))
         return node
     }
-
+    
     public func getPointCloudFromFile(fileName: String) -> (Int, Int, Int) {
+        // Open file
+        if let path = Bundle.main.path(forResource: fileName, ofType: "txt") {
+            do {
+                let dataString = try String(contentsOfFile: path, encoding: .ascii)
+                return getPointCloudFromString(dataString)
+            } catch {
+                print(error)
+            }
+        }
+        return (0,0,0)
+    }
+
+    public func getPointCloudFromString(_ dataString: String) -> (Int, Int, Int) {
 
         self.n = 0
         var i, j, k: Double
@@ -69,46 +86,38 @@ public class PointCloud {
         var maxJ: Int = 0
         var maxK: Int = 0
 
+        var myStrings = dataString.components(separatedBy: "\n")
 
-        // Open file
-        if let path = Bundle.main.path(forResource: fileName, ofType: "txt") {
-            do {
-                let data = try String(contentsOfFile: path, encoding: .ascii)
-                var myStrings = data.components(separatedBy: "\n")
-
-                // Read header
-                while !myStrings.isEmpty {
-                    let line = myStrings.removeFirst()
-                    if line.hasPrefix("element vertex ") {
-                        n = Int(line.components(separatedBy: " ")[2])!
-                        continue
-                    }
-                    if line.hasPrefix("end_header") {
-                        break
-                    }
-                }
-
-
-                // Read data
-                for d in 0...(self.n-1) {
-                    let line = myStrings[d]
-                    i = Double(line.components(separatedBy: " ")[0])!
-                    j = Double(line.components(separatedBy: " ")[1])!
-                    k = Double(line.components(separatedBy: " ")[2])!
-
-                    if Int(i) > maxI {maxI = Int(i)}
-                    if Int(j) > maxJ {maxJ = Int(j)}
-                    if Int(k) > maxK {maxK = Int(k)}
-
-                    let v = PointCloudVertex(i:i, j:j, k:k, t:.fixed)
-                    vertices.append(v)
-
-                }
-                NSLog("Point cloud data loaded: %d points", n)
-            } catch {
-                print(error)
+        // Read header
+        while !myStrings.isEmpty {
+            let line = myStrings.removeFirst()
+            if line.hasPrefix("element vertex ") {
+                n = Int(line.components(separatedBy: " ")[2])!
+                continue
+            }
+            if line.hasPrefix("end_header") {
+                break
             }
         }
+
+
+        // Read data
+        for d in 0...(self.n-1) {
+            let line = myStrings[d]
+            i = Double(line.components(separatedBy: " ")[0])!
+            j = Double(line.components(separatedBy: " ")[1])!
+            k = Double(line.components(separatedBy: " ")[2])!
+
+            if Int(i) > maxI {maxI = Int(i)}
+            if Int(j) > maxJ {maxJ = Int(j)}
+            if Int(k) > maxK {maxK = Int(k)}
+
+            let v = PointCloudVertex(i:i, j:j, k:k, t:.fixed)
+            vertices.append(v)
+
+        }
+        NSLog("Point cloud data loaded: %d points", n)
+
         return (maxI, maxJ, maxK)
     }
 
