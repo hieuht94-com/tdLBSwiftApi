@@ -52,12 +52,60 @@ public enum Direction2D {
 }
 
 public struct Pos2d {
-    public var c, r: Int
+    private var c, r: Int
 
     public init(c:Int, r:Int){
         self.c = c
         self.r = r
-    }}
+    }
+    public init(i:Int, j:Int){
+        self.c = i
+        self.r = j
+    }
+    public init(i:Int, k:Int){
+        self.c = i
+        self.r = k
+    }
+    public init(j:Int, k:Int){
+        self.c = k
+        self.r = j
+    }
+}
+
+
+public struct Pos2dIJ {
+    public var i, j: Int
+
+    public init(i:Int, j:Int){
+        self.i = i
+        self.j = j
+    }
+}
+
+public struct Pos2dIK {
+    public var i, k: Int
+
+    public init(i:Int, k:Int){
+        self.i = i
+        self.k = k
+    }
+}
+
+public struct Pos2dJK {
+    public var j, k: Int
+
+    public init(j:Int, k:Int){
+        self.j = j
+        self.k = k
+    }
+}
+
+
+
+
+
+
+
 
 
 

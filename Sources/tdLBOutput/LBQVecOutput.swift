@@ -9,7 +9,7 @@ import Foundation
 import tdLB
 
 
-extension LB {
+extension ComputeUnit {
 
     public func writeSparse2DPlaneXY<tCoordType: BinaryInteger, QVecType: BinaryFloatingPoint>(to binFileURL: URL, at cutAt: Int, qOutputLength: Int, tCoordType: tCoordType.Type, QVecType: QVecType.Type) {
 
@@ -32,7 +32,7 @@ extension LB {
 
                 for l in 0..<qOutputLength {
 
-                    myData.append(withUnsafeBytes(of: QVecType.init(grid[i][j][k].q[ l ])) { Data($0) })
+                    myData.append(withUnsafeBytes(of: QVecType.init(self.Q[i][j][k].q[ l ])) { Data($0) })
                 }
 
                 numStructs += 1

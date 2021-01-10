@@ -14,9 +14,9 @@ public protocol Geometry {
 
     var startingStep: Int {get}
 
-    var geomFixed: [FixedGeomPoints] {get set}
-    var geomRotating: [RotatingGeomPoints] {get set}
-//    var geomMoving: [MovingGeomPoints] {get set}
+    var geomFixed: [Pos3d] {get set}
+    var geomRotating: [Pos3d] {get set}
+    var geomTranslating: [Pos3d] {get set}
 
     init(fileName: String, outputJson: String) throws
 
@@ -24,8 +24,7 @@ public protocol Geometry {
     
     mutating func generateRotatingGeometry(atθ: Radian)
     
-//    mutating func generateMovingGeometry()
-
+    mutating func generateTranslatingGeometry()
     
     mutating func updateGeometry(forStep step: Int)
 

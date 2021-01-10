@@ -9,15 +9,11 @@ import Foundation
 //import Numerics
 
 
-
-
-
 public enum QLen: Int {
-    case q27 = 27
-    case q19 = 19
-    case q7 = 7
+    case q27 = 26
+    case q19 = 18
+    case q7 = 6
 }
-
 
 
 
@@ -35,12 +31,35 @@ public struct QVec<T: BinaryFloatingPoint> {
         self.q = Array(repeating: initialVal, count: qLen.rawValue)
     }
 
-    public init(q: [T]) {
+    public init(with q: [T]) {
         self.q = q
-    }
-    
-    public var rho: T {
-        return q[1] * q[2] * q[3]
     }
 
 }
+
+
+public struct Force<T: BinaryFloatingPoint> {
+    public var x: T
+    public var y: T
+    public var z: T
+
+    public init(x: T, y: T, z: T) {
+        self.x = x
+        self.y = y
+        self.z = z
+    }
+}
+
+
+public struct Velocity<T: BinaryFloatingPoint> {
+    public var x: T
+    public var y: T
+    public var z: T
+
+    public init(x: T, y: T, z: T) {
+        self.x = x
+        self.y = y
+        self.z = z
+    }
+}
+

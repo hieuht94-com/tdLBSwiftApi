@@ -10,13 +10,17 @@ import Foundation
 
 
 ///Represented by Real for testing, in reality always BinaryFloatingPoint
-//struct LB<TQ: Real> {
-public struct LB<TQ: BinaryFloatingPoint> {
-    public var grid: [[[ QVec<TQ> ]]]
+//struct ComputeUnit<TQ: Real> {
+public struct ComputeUnit<TQ: BinaryFloatingPoint> {
     public var x: Int
     public var y: Int
     public var z: Int
     public var qLen: QLen
+
+    public var Q: [[[ QVec<TQ> ]]]
+    public var F: [[[ Force<TQ> ]]]
+    public var 𝜈: [[[ TQ ]]]
+    public var O: [[[ Bool ]]]
 
     init(withQVec initial: QVec<TQ>, x: Int, y:Int, z:Int, qLen: QLen) {
         self.x = x
@@ -24,7 +28,10 @@ public struct LB<TQ: BinaryFloatingPoint> {
         self.z = z
         self.qLen = qLen
 
-        grid = Array(repeating: Array(repeating: Array(repeating: initial, count: z), count: y), count: x)
+        Q = Array(repeating: Array(repeating: Array(repeating: initial, count: z), count: y), count: x)
+        F = Array(repeating: Array(repeating: Array(repeating: Force(x: 0, y: 0, z: 0), count: z), count: y), count: x)
+        𝜈 = Array(repeating: Array(repeating: Array(repeating: 0, count: z), count: y), count: x)
+        O = Array(repeating: Array(repeating: Array(repeating: false, count: z), count: y), count: x)
     }
 
 
@@ -34,10 +41,13 @@ public struct LB<TQ: BinaryFloatingPoint> {
         self.z = z
         self.qLen = qLen
 
-        let q = QVec<TQ>(with: initialVal, qLen: qLen)
+        let initialQ = QVec<TQ>(with: initialVal, qLen: qLen)
         
-        grid = Array(repeating: Array(repeating: Array(repeating: q, count: z), count: y), count: x)
-        
+        Q = Array(repeating: Array(repeating: Array(repeating: initialQ, count: z), count: y), count: x)
+        F = Array(repeating: Array(repeating: Array(repeating: Force(x: 0, y: 0, z: 0), count: z), count: y), count: x)
+        𝜈 = Array(repeating: Array(repeating: Array(repeating: 0, count: z), count: y), count: x)
+        O = Array(repeating: Array(repeating: Array(repeating: false, count: z), count: y), count: x)
+
     }
     
     init(x: Int, y:Int, z:Int, qLen: QLen) {
@@ -61,7 +71,7 @@ public struct LB<TQ: BinaryFloatingPoint> {
 //
 //                    grid[i][j][k].q = u.map({o + $0})
         
-                    grid[i][j][k].q = q
+                    self.Q[i][j][k].q = q
                 
                 }}}
     }

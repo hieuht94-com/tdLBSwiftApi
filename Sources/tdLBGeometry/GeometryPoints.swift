@@ -55,9 +55,7 @@ public struct RotatingGeomPoints {
         self.iCart = Int(ceil(iCartFP))
         self.jCart = Int(ceil(jCartFP))
         self.kCart = Int(ceil(kCartFP))
-
-//        print(self.iCart, self.jCart, self.kCart)
-
+        
     }
 
 

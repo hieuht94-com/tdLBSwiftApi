@@ -12,6 +12,7 @@ import SceneKit
 public enum PointCloudElementType: Int {
     case rotating = 0
     case fixed = 1
+    case translating = 2
 }
 
 
@@ -34,6 +35,10 @@ public struct PointCloudVertex {
             self.r = 1
             self.g = 1
             self.b = 1
+        case .translating:
+            self.r = 2
+            self.g = 2
+            self.b = 2
         }
     }
 
