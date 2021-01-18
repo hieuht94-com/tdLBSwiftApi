@@ -20,13 +20,40 @@ public protocol Geometry {
 
     init(fileName: String, outputJson: String) throws
 
+    
+    
+    
+    
+    
+    
     mutating func generateFixedGeometry()
     
+    mutating func generateRotatingNonUpdatingGeometry()
+
     mutating func generateRotatingGeometry(atθ: Radian)
+    
+    mutating func updateRotatingGeometry(atθ: Radian)
+    
     
     mutating func generateTranslatingGeometry()
     
-    mutating func updateGeometry(forStep step: Int)
+    mutating func updateTranslatingGeometry(forStep step: Int)
+
+    
+    
+    
+    
+    func returnFixedGeometry() -> [Pos3d]
+
+    func returnRotatingNonUpdatingGeometry(atθ: Radian) -> [Pos3d]
+
+    func returnRotatingGeometry(atθ: Radian) -> [Pos3d]
+
+    func returnTranslatingGeometry() -> [Pos3d]
+    
+    
+    
+    
 
 
     func getRotatingPointCloud() -> [PointCloudVertex]
