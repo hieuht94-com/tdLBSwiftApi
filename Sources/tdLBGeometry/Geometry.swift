@@ -22,14 +22,11 @@ public protocol Geometry {
 
     
     
-    
-    
-    
-    
     mutating func generateFixedGeometry()
     
     mutating func generateRotatingNonUpdatingGeometry()
 
+    
     mutating func generateRotatingGeometry(atθ: Radian)
     
     mutating func updateRotatingGeometry(atθ: Radian)
@@ -45,18 +42,11 @@ public protocol Geometry {
     
     func returnFixedGeometry() -> [Pos3d]
 
-    func returnRotatingNonUpdatingGeometry(atθ: Radian) -> [Pos3d]
+    func returnRotatingNonUpdatingGeometry() -> [Pos3d]
 
-    func returnRotatingGeometry(atθ: Radian) -> [Pos3d]
+    func returnRotatingGeometry() -> [Pos3d]
 
     func returnTranslatingGeometry() -> [Pos3d]
     
     
-    
-    
-
-
-    func getRotatingPointCloud() -> [PointCloudVertex]
-    func getFixedPointCloud() -> [PointCloudVertex]
-
 }
