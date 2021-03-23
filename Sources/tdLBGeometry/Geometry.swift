@@ -15,6 +15,7 @@ public protocol Geometry {
     var startingStep: Int {get}
 
     var geomFixed: [Pos3d] {get set}
+    var geomRotatingNonUpdating: [Pos3d] {get set}
     var geomRotating: [Pos3d] {get set}
     var geomTranslating: [Pos3d] {get set}
 
@@ -27,6 +28,7 @@ public protocol Geometry {
     mutating func generateRotatingNonUpdatingGeometry()
 
     
+    
     mutating func generateRotatingGeometry(atθ: Radian)
     
     mutating func updateRotatingGeometry(atθ: Radian)
@@ -34,7 +36,7 @@ public protocol Geometry {
     
     mutating func generateTranslatingGeometry()
     
-    mutating func updateTranslatingGeometry(forStep step: Int)
+    mutating func updateTranslatingGeometry(atStep step: Int)
 
     
     
