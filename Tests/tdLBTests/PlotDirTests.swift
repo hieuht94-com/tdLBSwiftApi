@@ -13,9 +13,9 @@ class PlotDirTests: XCTestCase {
     let testRootDirURL = URL(fileURLWithPath: "testRootDir", isDirectory: true)
 
     let testDirStrings = [
-        "plot_vertical_axis.XYplane.V_4.Q_4.step_00000010.cut_10",
-        "plot_slice.XZplane.V_4.Q_4.step_00000010.cut_10",
-        "plot_axis.YZplane.V_4.Q_4.step_00000010.cut_10"
+        "plot_vertical_axis.XYplane.V5.step_00000010.cut_10",
+        "plot_slice.XZplane.V5.step_00000010.cut_10",
+        "plot_axis.YZplane.V5.step_00000010.cut_10"
     ]
     var testDirURLs = [URL]()
 

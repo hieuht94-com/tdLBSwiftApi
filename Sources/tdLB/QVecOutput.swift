@@ -1,17 +1,17 @@
 //
 //  File.swift
-//  
+//
 //
 //  Created by Niall Ó Broin on 11/09/2020.
 //
 
 import Foundation
-import tdLB
+
 
 
 extension ComputeUnit {
 
-    public func writeSparse2DPlaneXY<tCoordType: BinaryInteger, QVecType: BinaryFloatingPoint>(to binFileURL: URL, at cutAt: Int, qOutputLength: Int, tCoordType: tCoordType.Type, QVecType: QVecType.Type) {
+    public func writeSparseOrthoPlaneXY<tCoordType: BinaryInteger, QVecType: BinaryFloatingPoint>(to dir: URL, at cutAt: Int, qOutputLength: Int, tCoordType: tCoordType.Type, QVecType: QVecType.Type) {
 
         if type(of: tCoordType) == Int.self {
             fatalError("Do not write as Type 'Int' as it is platform dependant.")
@@ -19,7 +19,7 @@ extension ComputeUnit {
 
         var myData = Data()
         var numStructs = 0
-
+        
         for i in 0..<x {
             for j in 0..<y {
 
@@ -38,26 +38,22 @@ extension ComputeUnit {
                 numStructs += 1
             }}
 
-        try! myData.write(to: binFileURL)
-
+//        binFile.cutAt = cutAt
+//        binFile.qOutputLength = qOutputLength
+//        binFile.tCoordType = tCoordType
+//        binFile.QVecType = QVecType
         
-        
-        let d = QVecBinMeta(qDataType: String(describing: QVecType),
-                         qOutputLength: qOutputLength,
-                         binFileSizeInStructs: numStructs,
-                         coordsType: String(describing: tCoordType),
-                         gridX: x, gridY: y, gridZ: z,
-                         hasColRowtCoords: true,
-                         hasGridtCoords: false,
-                         idi: 1, idj: 1, idk: 1,
-                         name: "Written from mockLB in QVecTool Tests",
-                         ngx: 1, ngy: 1, ngz: 1,
-                         structName: "tDisk_colrow")
+        try! myData.write(to: dir)
 
-        try! d.write(to: URL(fileURLWithPath: binFileURL.path + ".json"))
+        try! writeJson(to: dir)
+
 
     }
 
+    func writeJson(to: URL) throws {
+        
+    }
+    
     public func writeSparseVolume() {
 
     }

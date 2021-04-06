@@ -10,6 +10,9 @@ import Foundation
 public typealias Radian = Float
 public typealias Degree = Float
 
+public typealias tStep = UInt32
+public typealias tNi = Int32
+
 
 
 public struct Size3d {
@@ -105,6 +108,13 @@ public struct Pos2dJK {
 
 
 
+public struct Grid {
+    //Number of cells in starting resolution grid.
+    let x, y, z: Int
+
+    //Number of nodes in the starting resolution grid.
+    let ngx, ngy, ngz: Int
+}
 
 
 

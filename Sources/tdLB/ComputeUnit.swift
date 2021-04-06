@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  LB.swift
 //
 //
 //  Created by Niall Ó Broin on 01/07/2020.
@@ -22,11 +22,15 @@ public struct ComputeUnit<TQ: BinaryFloatingPoint> {
     public var 𝜈: [[[ TQ ]]]
     public var O: [[[ Bool ]]]
 
-    init(withQVec initial: QVec<TQ>, x: Int, y:Int, z:Int, qLen: QLen) {
+    var outputTree: DiskOutputTree
+    
+    init(outputTree: DiskOutputTree, withQVec initial: QVec<TQ>, x: Int, y:Int, z:Int, qLen: QLen) {
         self.x = x
         self.y = y
         self.z = z
         self.qLen = qLen
+        self.outputTree = outputTree
+        
 
         Q = Array(repeating: Array(repeating: Array(repeating: initial, count: z), count: y), count: x)
         F = Array(repeating: Array(repeating: Array(repeating: Force(x: 0, y: 0, z: 0), count: z), count: y), count: x)
@@ -35,11 +39,12 @@ public struct ComputeUnit<TQ: BinaryFloatingPoint> {
     }
 
 
-    init(with initialVal: TQ, x: Int, y:Int, z:Int, qLen: QLen) {
+    init(outputTree: DiskOutputTree, with initialVal: TQ, x: Int, y:Int, z:Int, qLen: QLen) {
         self.x = x
         self.y = y
         self.z = z
         self.qLen = qLen
+        self.outputTree = outputTree
 
         let initialQ = QVec<TQ>(with: initialVal, qLen: qLen)
         
@@ -50,9 +55,9 @@ public struct ComputeUnit<TQ: BinaryFloatingPoint> {
 
     }
     
-    init(x: Int, y:Int, z:Int, qLen: QLen) {
-        self.init(with: 0, x:x, y:y, z:z, qLen:qLen)
-    }
+//    init(x: Int, y:Int, z:Int, qLen: QLen) {
+//        self.init(with: 0, x:x, y:y, z:z, qLen:qLen)
+//    }
 
     
     ///Sets up the LB Matrix with some dummy test data

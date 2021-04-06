@@ -17,9 +17,14 @@ class OutputDirTests: XCTestCase {
     var isDirectory = ObjCBool(true)
 
     let testDirStrings = [
-        "plot_vertical_axis.XYplane.V_4.Q_4.step_00000010.cut_10",
-        "plot_slice.XZplane.V_4.Q_4.step_00000010.cut_10",
-        "plot_axis.YZplane.V_4.Q_4.step_00000010.cut_10"
+        "plot.XYplane.V5.step_00000010.cut_10",
+        "plot.XZplane.V5.step_00000010.cut_10",
+        "plot.XZplane.V5.step_00000010.cut_11",
+        "plot.XZplane.V5.step_00000010.cut_12",
+        "plot.XZplane.V5.step_00000020.cut_10",
+        "plot.XZplane.V5.step_00000020.cut_11",
+        "plot.XZplane.V5.step_00000020.cut_12",
+        "plot.YZplane.V5.step_00000010.cut_10"
     ]
     var testDirURLs = [URL]()
 
@@ -75,11 +80,11 @@ class OutputDirTests: XCTestCase {
         let outDir = try! OutputDir(rootDir: testRootDir, createDir: true)
 
 
-        let xyString = outDir.formatXYPlane(QLength: 4, step: 10, atK:10)
+        let xyString = outDir.formatXYPlane(step: 10, atK:10)
 
         XCTAssertEqual(xyString, testDirStrings[0])
 
-        let xyPlotDir = outDir.createXYPlane(QLength: 4, step: 10, atK:10)
+        let xyPlotDir = outDir.createXYPlane(step: 10, atK:10)
         XCTAssert(fm.fileExists(atPath: xyPlotDir.path, isDirectory: &isDirectory))
     }
 
@@ -87,10 +92,10 @@ class OutputDirTests: XCTestCase {
     func testPlotFormattedAndCreatedXZPlane() {
         let outDir = try! OutputDir(rootDir: testRootDir, createDir: true)
 
-        let xzString = outDir.formatXZPlane(QLength: 4, step: 10, atJ:10)
+        let xzString = outDir.formatXZPlane(step: 10, atJ:10)
         XCTAssertEqual(xzString, testDirStrings[1])
 
-        let xzPlotDir = outDir.createXZPlane(QLength: 4, step: 10, atJ:10)
+        let xzPlotDir = outDir.createXZPlane(step: 10, atJ:10)
         XCTAssert(fm.fileExists(atPath: xzPlotDir.path, isDirectory: &isDirectory))
 
     }
@@ -98,10 +103,10 @@ class OutputDirTests: XCTestCase {
     func testPlotFormattedAndCreatedYZPlane() {
         let outDir = try! OutputDir(rootDir: testRootDir, createDir: true)
 
-        let yzString = outDir.formatYZPlane(QLength: 4, step: 10, atI:10)
+        let yzString = outDir.formatYZPlane(step: 10, atI:10)
         XCTAssertEqual(yzString, testDirStrings[2])
 
-        let yzPlotDir = outDir.createYZPlane(QLength: 4, step: 10, atI:10)
+        let yzPlotDir = outDir.createYZPlane(step: 10, atI:10)
         XCTAssert(fm.fileExists(atPath: yzPlotDir.path, isDirectory: &isDirectory))
 
     }
@@ -113,9 +118,9 @@ class OutputDirTests: XCTestCase {
         let outDir = try! OutputDir(rootDir: testRootDir, createDir: true)
 
 
-        let _ = outDir.createXYPlane(QLength: 4, step: 10, atK:10)
-        let _ = outDir.createXZPlane(QLength: 4, step: 10, atJ:10)
-        let _ = outDir.createYZPlane(QLength: 4, step: 10, atI:10)
+        let _ = outDir.createXYPlane(step: 10, atK:10)
+        let _ = outDir.createXZPlane(step: 10, atJ:10)
+        let _ = outDir.createYZPlane(step: 10, atI:10)
 
 
         let dirs:[URL] = outDir.plotDirs()

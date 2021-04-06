@@ -4,7 +4,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "tdLBApi",
+    name: "tdLBSwiftApi",
     platforms: [
         .macOS(.v10_12),
 //        .iOS(.v13)
@@ -12,8 +12,8 @@ let package = Package(
     products: [
         // Products define the executables and libraries produced by a package, and make them visible to other packages.
         .library(
-            name: "tdLBApi",
-            targets: ["tdLB", "tdLBGeometry", "tdLBOutputGeometry", "tdLBOutput"]),
+            name: "tdLBSwiftApi",
+            targets: ["tdLB", "tdLBGeometry"]),
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -28,12 +28,6 @@ let package = Package(
         .target(
             name: "tdLBGeometry",
             dependencies: ["tdLB"]),
-        .target(
-            name: "tdLBOutputGeometry",
-            dependencies: ["tdLB"]),
-        .target(
-            name: "tdLBOutput",
-            dependencies: ["tdLB"]),
         
         .testTarget(
             name: "tdLBTests",
@@ -41,11 +35,5 @@ let package = Package(
         .testTarget(
             name: "tdLBGeometryTests",
             dependencies: ["tdLBGeometry"]),
-        .testTarget(
-            name: "tdLBOutputGeometryTests",
-            dependencies: ["tdLBOutputGeometry"]),
-        .testTarget(
-            name: "tdLBOutputTests",
-            dependencies: ["tdLBOutput"])
     ]
 )
