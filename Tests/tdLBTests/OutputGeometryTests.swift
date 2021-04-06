@@ -1,5 +1,5 @@
 import XCTest
-@testable import tdLBOutputGeometry
+@testable import tdLB
 
 
 final class OutputGeometryTests: XCTestCase {

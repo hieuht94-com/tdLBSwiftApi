@@ -52,7 +52,7 @@ public struct DiskOutputTree {
         
         if createDir {
             try createDirIfDoesntExist(self.rootDir)
-            // TODO: Check can write directory below
+            // TODO: Check has permissions to write directory below
         }
         
     }
