@@ -1,3 +1,0 @@
-# Turbulent Dynamics Lattice Boltzmann
-
-
