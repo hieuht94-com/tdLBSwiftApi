@@ -1,7 +1,6 @@
 import XCTest
 @testable import tdLB
 
-
 final class ApiTests: XCTestCase {
     func testExample() {
         // This is an example of a functional test case.
@@ -10,10 +9,7 @@ final class ApiTests: XCTestCase {
 //        XCTAssertEqual(tdLBApi().text, "Hello, World!")
     }
 
-
-    
-
     static var allTests = [
-        ("testExample", testExample),
+        ("testExample", testExample)
     ]
 }

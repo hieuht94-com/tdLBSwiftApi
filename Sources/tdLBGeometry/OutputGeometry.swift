@@ -10,7 +10,6 @@
 import Foundation
 import tdLB
 
-
 // MARK: - Output
 public struct OutputGeometry: Codable {
     public var volume = [Volume]()
@@ -18,10 +17,10 @@ public struct OutputGeometry: Codable {
     public var ortho2DXZ = [Ortho2D]()
     public var ortho2DYZ = [Ortho2D]()
 
-    public init(){
+    public init() {
     }
-    
-    public init(volume: [Volume], ortho2DXY: [Ortho2D], ortho2DXZ: [Ortho2D], ortho2DYZ: [Ortho2D]){
+
+    public init(volume: [Volume], ortho2DXY: [Ortho2D], ortho2DXZ: [Ortho2D], ortho2DYZ: [Ortho2D]) {
 
         self.volume = volume
         self.ortho2DXY = ortho2DXY
@@ -29,25 +28,22 @@ public struct OutputGeometry: Codable {
         self.ortho2DYZ = ortho2DYZ
     }
 
-    public mutating func add(_ volume: Volume){
+    public mutating func add(_ volume: Volume) {
         self.volume.append(volume)
     }
-    public mutating func add(xy: Ortho2D){
+    public mutating func add(xy: Ortho2D) {
         self.ortho2DXY.append(xy)
     }
-    public mutating func add(xz: Ortho2D){
+    public mutating func add(xz: Ortho2D) {
         self.ortho2DXZ.append(xz)
     }
-    public mutating func add(yz: Ortho2D){
+    public mutating func add(yz: Ortho2D) {
         self.ortho2DYZ.append(yz)
     }
 
     //    public var angle2D: [Angle2D]
 
-
-
 }
-
 
 // MARK: Output convenience initializers and mutators
 
@@ -68,8 +64,6 @@ extension OutputGeometry {
         try self.init(data: try Data(contentsOf: url))
     }
 
-
-
     public func jsonData() throws -> Data {
         return try newJSONEncoder().encode(self)
     }
@@ -79,14 +73,12 @@ extension OutputGeometry {
     }
 }
 
-
-
 // MARK: - Volume
 public struct Volume: Codable {
     public var repeatStep: Int
     public var fromStep, toStep: Int
 
-    public init(repeatStep:Int, fromStep:Int = 0, toStep:Int = 0){
+    public init(repeatStep: Int, fromStep: Int = 0, toStep: Int = 0) {
         self.repeatStep = repeatStep
         self.fromStep = fromStep
         self.toStep = toStep
@@ -120,16 +112,12 @@ extension Volume {
     }
 }
 
-
-
-
-
 // MARK: - Ortho2D
 public struct Ortho2D: Codable {
     public var at, repeatStep: Int
     public var fromStep, toStep: Int
 
-    public init(at:Int, repeatStep:Int, fromStep:Int = 0, toStep:Int = 0){
+    public init(at: Int, repeatStep: Int, fromStep: Int = 0, toStep: Int = 0) {
         self.at = at
         self.repeatStep = repeatStep
         self.fromStep = fromStep
@@ -164,20 +152,13 @@ extension Ortho2D {
     }
 }
 
-
-
-
-
-
-
-
 // MARK: - Angle2D
 public struct Angle2D: Codable {
     public var atAngle: Radian
     public var repeatStep: Int
     public var fromStep, toStep: Int
 
-    public init(atAngle:Radian, repeatStep:Int, fromStep:Int = 0, toStep:Int = 0){
+    public init(atAngle: Radian, repeatStep: Int, fromStep: Int = 0, toStep: Int = 0) {
         self.atAngle = atAngle
         self.repeatStep = repeatStep
         self.fromStep = fromStep
@@ -211,20 +192,9 @@ extension Angle2D {
     }
 }
 
-
-
-
-
-
-
-
-
-
-
-
 // MARK: - Helper functions for creating encoders and decoders
 
-fileprivate func newJSONDecoder() -> JSONDecoder {
+private func newJSONDecoder() -> JSONDecoder {
     let decoder = JSONDecoder()
     if #available(iOS 10.0, OSX 10.12, tvOS 10.0, watchOS 3.0, *) {
         decoder.dateDecodingStrategy = .iso8601
@@ -232,7 +202,7 @@ fileprivate func newJSONDecoder() -> JSONDecoder {
     return decoder
 }
 
-fileprivate func newJSONEncoder() -> JSONEncoder {
+private func newJSONEncoder() -> JSONEncoder {
     let encoder = JSONEncoder()
     if #available(iOS 10.0, OSX 10.12, tvOS 10.0, watchOS 3.0, *) {
         encoder.dateEncodingStrategy = .iso8601

@@ -1,21 +1,19 @@
 //
-//  File.swift
+//  QVec.swift
 //
 //
 //  Created by Niall Ó Broin on 01/07/2020.
 //
 
 import Foundation
-//import Numerics
 
+//import Numerics
 
 public enum QLen: Int {
     case q27 = 26
     case q19 = 18
     case q7 = 6
 }
-
-
 
 ///Use Real for testing, in reality always BinaryFloatingPoint
 //struct QVec<T: Real> {
@@ -27,7 +25,7 @@ public struct QVec<T: BinaryFloatingPoint> {
     }
 
     public init(with initialVal: T, qLen: QLen) {
-        
+
         self.q = Array(repeating: initialVal, count: qLen.rawValue)
     }
 
@@ -36,7 +34,6 @@ public struct QVec<T: BinaryFloatingPoint> {
     }
 
 }
-
 
 public struct Force<T: BinaryFloatingPoint> {
     public var x: T
@@ -50,7 +47,6 @@ public struct Force<T: BinaryFloatingPoint> {
     }
 }
 
-
 public struct Velocity<T: BinaryFloatingPoint> {
     public var x: T
     public var y: T
@@ -62,4 +58,3 @@ public struct Velocity<T: BinaryFloatingPoint> {
         self.z = z
     }
 }
-

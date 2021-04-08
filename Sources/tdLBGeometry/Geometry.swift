@@ -8,40 +8,31 @@ import tdLB
 
 public protocol Geometry {
 
-    var gridX: Int {get}
-    var gridY: Int {get}
-    var gridZ: Int {get}
+    var gridX: Int { get }
+    var gridY: Int { get }
+    var gridZ: Int { get }
 
-    var startingStep: Int {get}
+    var startingStep: Int { get }
 
-    var geomFixed: [Pos3d] {get set}
-    var geomRotatingNonUpdating: [Pos3d] {get set}
-    var geomRotating: [Pos3d] {get set}
-    var geomTranslating: [Pos3d] {get set}
+    var geomFixed: [Pos3d] { get set }
+    var geomRotatingNonUpdating: [Pos3d] { get set }
+    var geomRotating: [Pos3d] { get set }
+    var geomTranslating: [Pos3d] { get set }
 
     init(fileName: String, outputJson: String) throws
 
-    
-    
     mutating func generateFixedGeometry()
-    
+
     mutating func generateRotatingNonUpdatingGeometry()
 
-    
-    
     mutating func generateRotatingGeometry(atθ: Radian)
-    
+
     mutating func updateRotatingGeometry(atθ: Radian)
-    
-    
+
     mutating func generateTranslatingGeometry()
-    
+
     mutating func updateTranslatingGeometry(atStep step: Int)
 
-    
-    
-    
-    
     func returnFixedGeometry() -> [Pos3d]
 
     func returnRotatingNonUpdatingGeometry() -> [Pos3d]
@@ -49,6 +40,5 @@ public protocol Geometry {
     func returnRotatingGeometry() -> [Pos3d]
 
     func returnTranslatingGeometry() -> [Pos3d]
-    
-    
+
 }

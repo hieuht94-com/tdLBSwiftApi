@@ -1,7 +1,6 @@
 import XCTest
 @testable import tdLB
 
-
 final class OutputGeometryTests: XCTestCase {
     func testExample() {
         // This is an example of a functional test case.
@@ -11,6 +10,6 @@ final class OutputGeometryTests: XCTestCase {
     }
 
     static var allTests = [
-        ("testExample", testExample),
+        ("testExample", testExample)
     ]
 }

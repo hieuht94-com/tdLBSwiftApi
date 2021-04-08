@@ -7,11 +7,15 @@
 
 import Foundation
 
-
-
 extension ComputeUnit {
 
-    public func writeSparseOrthoPlaneXY<tCoordType: BinaryInteger, QVecType: BinaryFloatingPoint>(to dir: URL, at cutAt: Int, qOutputLength: Int, tCoordType: tCoordType.Type, QVecType: QVecType.Type) {
+    public func writeSparseOrthoPlaneXY<tCoordType: BinaryInteger, QVecType: BinaryFloatingPoint>(
+        to dir: URL,
+        at cutAt: Int,
+        qOutputLength: Int,
+        tCoordType: tCoordType.Type,
+        QVecType: QVecType.Type
+    ) {
 
         if type(of: tCoordType) == Int.self {
             fatalError("Do not write as Type 'Int' as it is platform dependant.")
@@ -19,7 +23,7 @@ extension ComputeUnit {
 
         var myData = Data()
         var numStructs = 0
-        
+
         for i in 0..<x {
             for j in 0..<y {
 
@@ -32,28 +36,28 @@ extension ComputeUnit {
 
                 for l in 0..<qOutputLength {
 
-                    myData.append(withUnsafeBytes(of: QVecType.init(self.Q[i][j][k].q[ l ])) { Data($0) })
+                    myData.append(withUnsafeBytes(of: QVecType.init(self.Q[i][j][k].q[l])) { Data($0) })
                 }
 
                 numStructs += 1
-            }}
+            }
+        }
 
-//        binFile.cutAt = cutAt
-//        binFile.qOutputLength = qOutputLength
-//        binFile.tCoordType = tCoordType
-//        binFile.QVecType = QVecType
-        
+        //        binFile.cutAt = cutAt
+        //        binFile.qOutputLength = qOutputLength
+        //        binFile.tCoordType = tCoordType
+        //        binFile.QVecType = QVecType
+
         try! myData.write(to: dir)
 
         try! writeJson(to: dir)
 
-
     }
 
     func writeJson(to: URL) throws {
-        
+
     }
-    
+
     public func writeSparseVolume() {
 
     }
@@ -62,6 +66,4 @@ extension ComputeUnit {
 
     }
 
-}//end of LB Entension
-
-
+}  //end of LB Entension

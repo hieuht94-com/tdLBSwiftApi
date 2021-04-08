@@ -1,6 +1,6 @@
 //
 //  InputFilesV4URLTests.swift
-//  tdQVecTool
+//  tdLBQVecTool
 //
 //  Created by Niall Ó Broin on 15/10/2019.
 //
@@ -11,26 +11,25 @@ import XCTest
 class DiskOutputTreeTests: XCTestCase {
 
     let fm = FileManager.default
-    var testRootDir:String = ""
+    var testRootDir: String = ""
     var testRootDirURL: URL!
 
     var isDirectory = ObjCBool(true)
 
     let testDirStrings = [
         "plot.XYplane.V5.step_00000010.cut_10",
-        
+
         "plot.XZplane.V5.step_00000010.cut_10",
         "plot.XZplane.V5.step_00000010.cut_11",
         "plot.XZplane.V5.step_00000010.cut_12",
         "plot.XZplane.V5.step_00000020.cut_10",
         "plot.XZplane.V5.step_00000020.cut_11",
         "plot.XZplane.V5.step_00000020.cut_12",
-        
+
         "plot.YZplane.V5.step_00000010.cut_10"
     ]
     var testDirURLs = [URL]()
 
-    
     override func setUp() {
         super.setUp()
         testRootDir = fm.currentDirectoryPath + "/testRootDir"
@@ -43,7 +42,7 @@ class DiskOutputTreeTests: XCTestCase {
             //Item probably didnt exist
         }
 
-        testDirURLs = testDirStrings.map{ testRootDirURL.appendingPathComponent($0, isDirectory: true) }
+        testDirURLs = testDirStrings.map { testRootDirURL.appendingPathComponent($0, isDirectory: true) }
     }
 
     override func tearDown() {
@@ -55,15 +54,13 @@ class DiskOutputTreeTests: XCTestCase {
         }
     }
 
-
-
     func testDiskOutputTreeInitWhenDirExists() {
         let o = try! DiskOutputTree(rootDir: testRootDirURL)
         //TODO
     }
 
     func testDiskOutputTreeIsCreated() {
-        let _ = try! DiskOutputTree(rootDir: testRootDirURL, createDir: true)
+        _ = try! DiskOutputTree(rootDir: testRootDirURL, createDir: true)
         XCTAssert(fm.fileExists(atPath: testRootDir))
         XCTAssert(fm.fileExists(atPath: testRootDir, isDirectory: &isDirectory))
     }
@@ -73,10 +70,4 @@ class DiskOutputTreeTests: XCTestCase {
         //            XCTAssertThrowsError
     }
 
-
-
-
-
-    
-    
 }

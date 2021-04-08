@@ -6,14 +6,14 @@ import PackageDescription
 let package = Package(
     name: "tdLBSwiftApi",
     platforms: [
-        .macOS(.v10_12),
+        .macOS(.v10_12)
 //        .iOS(.v13)
     ],
     products: [
         // Products define the executables and libraries produced by a package, and make them visible to other packages.
         .library(
             name: "tdLBSwiftApi",
-            targets: ["tdLB", "tdLBGeometry"]),
+            targets: ["tdLB", "tdLBGeometry"])
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -28,12 +28,12 @@ let package = Package(
         .target(
             name: "tdLBGeometry",
             dependencies: ["tdLB"]),
-        
+
         .testTarget(
             name: "tdLBTests",
             dependencies: ["tdLB"]),
         .testTarget(
             name: "tdLBGeometryTests",
-            dependencies: ["tdLBGeometry"]),
+            dependencies: ["tdLBGeometry"])
     ]
 )
