@@ -57,6 +57,9 @@ class DiskOutputTreeTests: XCTestCase {
     func testDiskOutputTreeInitWhenDirExists() {
         let o = try! DiskOutputTree(rootDir: testRootDirURL)
         //TODO
+        XCTAssert(o.dirExists(dir: testRootDirURL))
+        XCTAssert(fm.fileExists(atPath: testRootDir))
+        XCTAssert(fm.fileExists(atPath: testRootDir, isDirectory: &isDirectory))
     }
 
     func testDiskOutputTreeIsCreated() {
@@ -68,6 +71,8 @@ class DiskOutputTreeTests: XCTestCase {
     func testDiskOutputTreeCannotBeCreatedDueToPermissions() {
         // TODO
         //            XCTAssertThrowsError
+        XCTAssertThrowsError(fm.fileExists(atPath: testRootDir))
+        XCTAssertThrowsError(fm.fileExists(atPath: testRootDir, isDirectory: &isDirectory))
     }
 
 }
